@@ -1,0 +1,36 @@
+/* Footer — bottom of every route */
+
+.footer {
+  background-color: var(--color-surface-soft);
+  border-top: 1px solid var(--color-border);
+  margin-top: auto;
+}
+
+.footer__inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--container-padding);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-xs);
+}
+
+.footer__brand {
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semibold);
+  color: var(--color-brand-strong);
+  text-decoration: none;
+}
+
+.footer__tagline {
+  font-size: var(--fs-sm);
+  color: var(--color-text-secondary);
+}
+
+.footer__copyright {
+  margin-top: var(--space-xs);
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+}

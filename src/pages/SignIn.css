@@ -1,0 +1,349 @@
+/* =============================================================
+   Auth pages (Sign In / Sign Up) — two-panel layout:
+   - Left:  form panel on ivory background
+   - Right: image panel with a real photo, fully visible
+
+   Mobile-first. Breakpoint: 768px (tablet/desktop — two columns).
+   All values use design tokens from src/index.css.
+
+   Note: this file styles the Sign In page. Sign Up reuses the same
+   class names (.auth, .auth__brand, etc.) and shares the layout —
+   SignUp.css only extends the form area for the extra fields.
+
+
+   ─────────────────────────────────────────────────────────────
+   HOW TO ADJUST THE IMAGE
+   ─────────────────────────────────────────────────────────────
+
+   1) IMAGE SIZE:
+      On .auth__brand-image, change `max-height` to make the image
+      smaller or larger:
+        max-height: 480px;   ← smaller, more compact
+        max-height: 560px;   ← current default
+        max-height: 720px;   ← larger
+
+   2) IMAGE WIDTH (relative to the form):
+      In the @media blocks below, change `grid-template-columns`:
+        grid-template-columns: 1.2fr 1fr;   ← form wider, image narrower
+        grid-template-columns: 1fr 1fr;     ← equal columns
+        grid-template-columns: 1fr 1.5fr;   ← image wider than form
+
+   3) IMAGE FIT:
+      The image uses `object-fit: contain`, so the entire image is
+      always visible without distortion. To fill the panel and crop
+      the image instead, change it to `object-fit: cover`.
+
+   4) PAGE HEIGHT:
+      `min-height: 600px` on `.auth` (desktop) keeps Sign In and
+      Sign Up the same height. Change it if you want a taller or
+      shorter auth page.
+   ============================================================= */
+
+.auth {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: calc(100vh - 80px);
+}
+
+/* =============================================================
+   Form panel (left column on desktop)
+   ============================================================= */
+
+.auth__panel {
+  background-color: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2xl) var(--container-padding);
+}
+
+.auth__form-wrap {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* --- Header --- */
+
+.auth__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.auth__title {
+  font-size: var(--fs-2xl);
+  line-height: var(--lh-tight);
+  color: var(--color-brand-strong);
+  letter-spacing: var(--tracking-tight);
+}
+
+.auth__lead {
+  font-size: var(--fs-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--lh-relaxed);
+}
+
+/* --- Info notice (shown after submit) --- */
+
+.auth__notice {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  padding: var(--space-md) var(--space-base);
+  background-color: var(--color-warning-tint);
+  border-left: 3px solid var(--color-warning);
+  border-radius: var(--radius-md);
+}
+
+.auth__notice-title {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-warning);
+}
+
+.auth__notice-text {
+  font-size: var(--fs-sm);
+  color: var(--color-text);
+  line-height: var(--lh-relaxed);
+}
+
+/* --- Form --- */
+
+.auth__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.auth__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.auth__label {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--color-text);
+}
+
+.auth__input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: var(--fs-base);
+  font-family: inherit;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast),
+              box-shadow var(--transition-fast);
+}
+
+.auth__input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.auth__input:hover {
+  border-color: var(--color-border-strong);
+}
+
+.auth__input:focus {
+  outline: none;
+  border-color: var(--color-brand);
+  box-shadow: var(--focus-ring);
+}
+
+.auth__input--error {
+  border-color: var(--color-error);
+}
+
+.auth__input--error:focus {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(156, 58, 46, 0.25);
+}
+
+.auth__error {
+  font-size: var(--fs-xs);
+  color: var(--color-error);
+  line-height: var(--lh-snug);
+}
+
+/* --- Checkbox (show password) --- */
+
+.auth__checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--fs-sm);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.auth__checkbox input {
+  width: auto;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* --- Submit button --- */
+
+.auth__submit {
+  width: 100%;
+  padding: var(--space-md) var(--space-lg);
+  font-family: inherit;
+  font-size: var(--fs-base);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-on-brand);
+  background-color: var(--color-brand);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  margin-top: var(--space-xs);
+}
+
+.auth__submit:hover:not(:disabled) {
+  background-color: var(--color-brand-strong);
+}
+
+.auth__submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* --- Alt link (Sign Up / Sign In) --- */
+
+.auth__alt {
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--color-text-secondary);
+}
+
+.auth__alt-link {
+  color: var(--color-brand);
+  font-weight: var(--fw-semibold);
+  text-decoration: none;
+}
+
+.auth__alt-link:hover {
+  color: var(--color-brand-strong);
+  text-decoration: underline;
+}
+
+/* --- Demo account preview link --- */
+
+.auth__demo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-md);
+  border-top: 1px dashed var(--color-border-strong);
+  border-bottom: 1px dashed var(--color-border-strong);
+}
+
+.auth__demo-link {
+  display: inline-block;
+  padding: var(--space-sm) var(--space-lg);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-brand-strong);
+  background-color: transparent;
+  border: 1px solid var(--color-brand);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: background-color var(--transition-fast),
+              color var(--transition-fast);
+}
+
+.auth__demo-link:hover {
+  background-color: var(--color-brand-tint);
+  color: var(--color-brand-strong);
+}
+
+.auth__demo-text {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: var(--lh-snug);
+  max-width: 32ch;
+}
+
+/* --- Back to restaurants --- */
+
+.auth__back {
+  text-align: center;
+  padding-top: var(--space-sm);
+}
+
+.auth__back-link {
+  font-size: var(--fs-sm);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+}
+
+.auth__back-link:hover {
+  color: var(--color-brand-strong);
+}
+
+/* =============================================================
+   Image panel (right column on desktop)
+   ============================================================= */
+
+.auth__brand {
+  display: none;
+  background-color: var(--color-surface);
+  padding: var(--space-2xl);
+  align-items: center;
+  justify-content: center;
+}
+
+.auth__brand-image {
+  display: block;
+  max-width: 100%;
+  max-height: 560px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* =============================================================
+   Responsive: tablet and desktop (≥768px) — two columns
+   ============================================================= */
+
+@media (min-width: 768px) {
+  /* IMAGE WIDTH: change 1.2fr 1fr to adjust the form/image ratio.
+     min-height keeps Sign In and Sign Up the same height. */
+  .auth {
+    min-height: 600px;
+    grid-template-columns: 1.2fr 1fr;
+  }
+
+  .auth__brand {
+    display: flex;
+  }
+
+  .auth__panel {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  /* IMAGE WIDTH: change 1.3fr 1fr to adjust the form/image ratio
+     on large desktops. */
+  .auth {
+    grid-template-columns: 1.3fr 1fr;
+  }
+
+  .auth__form-wrap {
+    max-width: 440px;
+  }
+
+  .auth__title {
+    font-size: var(--fs-3xl);
+  }
+}

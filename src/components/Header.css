@@ -1,0 +1,300 @@
+/* Header — top navigation bar, present on every route */
+
+.header {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background-color var(--transition-fast),
+              border-color var(--transition-fast);
+}
+
+.header__inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--space-md) var(--container-padding);
+  display: flex;
+  align-items: center;
+  /* 3-column space-between: brand | nav | actions */
+  justify-content: space-between;
+  gap: var(--space-lg);
+}
+
+/* --- Brand --- */
+
+.header__brand {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.header__brand-logo {
+  display: block;
+  height: 44px;
+  width: auto;
+  /* Slight opacity transition on hover for a subtle premium feel */
+  transition: opacity var(--transition-fast);
+}
+
+.header__brand:hover .header__brand-logo {
+  opacity: 0.85;
+}
+
+/* --- Burger (mobile only) --- */
+
+.header__burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.header__burger-bar {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-color: var(--color-brand-strong);
+  border-radius: 2px;
+}
+
+/* --- Navigation (desktop default, centered column) --- */
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  /* Center the nav between brand and actions */
+  flex: 1;
+  justify-content: center;
+}
+
+.header__nav-list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.header__nav-link {
+  display: inline-block;
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast),
+              background-color var(--transition-fast);
+}
+
+.header__nav-link:hover {
+  color: var(--color-brand-strong);
+}
+
+.header__nav-link.is-active {
+  color: var(--color-brand-strong);
+  background-color: var(--color-brand-tint);
+}
+
+/* --- Actions (Sign In + Cart, right side) --- */
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.header__signin {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-xs) var(--space-md);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--color-text-on-brand);
+  background-color: var(--color-brand);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: background-color var(--transition-fast),
+              color var(--transition-fast);
+}
+
+.header__signin:hover {
+  background-color: var(--color-brand-strong);
+  color: var(--color-text-on-brand);
+}
+
+/* --- Cart link with badge --- */
+
+.header__cart {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--color-brand-strong);
+  background-color: var(--color-surface-soft);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: background-color var(--transition-fast),
+              border-color var(--transition-fast),
+              color var(--transition-fast);
+}
+
+.header__cart:hover {
+  background-color: var(--color-brand-tint);
+  border-color: var(--color-brand-soft);
+  color: var(--color-brand-strong);
+}
+
+.header__cart-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.header__cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: var(--fw-bold);
+  color: var(--color-text-on-brand);
+  background-color: var(--color-brand);
+  border: 2px solid var(--color-surface);
+  border-radius: var(--radius-pill);
+  line-height: 1;
+}
+
+/* --- On the home page, header sits over the green hero
+       and visually merges with it: transparent background,
+       no border. --- */
+
+.app--home .header {
+  background-color: transparent;
+  border-bottom-color: transparent;
+}
+
+/* --- Mobile layout --- */
+
+@media (max-width: 768px) {
+  .header__burger {
+    display: flex;
+  }
+
+  /* Slightly smaller logo on mobile to fit the tighter bar */
+  .header__brand-logo {
+    height: 36px;
+  }
+
+  .header__nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    flex: none;
+    gap: var(--space-sm);
+    padding: var(--space-base) var(--container-padding)
+             var(--space-base) var(--container-padding);
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform var(--transition-fast),
+                opacity var(--transition-fast);
+  }
+
+  .header__nav--open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .header__nav-list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-xs);
+  }
+
+  .header__nav-link {
+    display: block;
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--fs-base);
+  }
+
+  /* On mobile, actions move into the dropdown panel below the nav. */
+  .header__actions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 0 var(--container-padding) var(--space-base);
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform var(--transition-fast),
+                opacity var(--transition-fast);
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-sm);
+  }
+
+  .header__nav--open ~ .header__actions {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .header__signin {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--fs-base);
+    justify-content: center;
+  }
+
+  .header__cart {
+    width: 100%;
+    height: auto;
+    padding: var(--space-sm) var(--space-md);
+    gap: var(--space-sm);
+    justify-content: flex-start;
+  }
+
+  .header__cart-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .header__cart::after {
+    content: 'Cart';
+    font-size: var(--fs-base);
+    font-weight: var(--fw-medium);
+    color: var(--color-text-secondary);
+  }
+
+  .header__cart-badge {
+    position: static;
+    margin-left: auto;
+    min-width: 22px;
+    height: 22px;
+    font-size: 12px;
+  }
+}

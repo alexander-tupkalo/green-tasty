@@ -1,0 +1,78 @@
+/* =============================================================
+   Sign Up page — extends the shared auth layout from SignIn.css.
+
+   The shared classes (.auth, .auth__brand, .auth__panel,
+   .auth__form, .auth__input, etc.) are defined in SignIn.css and
+   reused here unchanged. This file only adds:
+
+   - .signup__form-wrap      — slightly wider form area for the
+                              extra fields on Sign Up
+   - .signup__password-rules — checklist of password requirements
+   - .signup__password-rule  — single requirement item (with --ok
+                              modifier when the rule is satisfied)
+
+   This file MUST be imported AFTER SignIn.css in the same project
+   for the shared styles to take effect. In our setup, SignUp.jsx
+   imports './SignUp.css', and SignIn.jsx imports './SignIn.css';
+   both end up in the same global stylesheet after Vite bundling,
+   so the shared rules from SignIn.css are always available.
+   ============================================================= */
+
+.signup__form-wrap {
+  max-width: 460px;
+}
+
+/* --- Password rules checklist --- */
+
+.signup__password-rules {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-surface-soft);
+  border-radius: var(--radius-sm);
+  list-style: none;
+}
+
+.signup__password-rule {
+  position: relative;
+  padding-left: var(--space-lg);
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  line-height: var(--lh-snug);
+  transition: color var(--transition-fast);
+}
+
+.signup__password-rule::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 50%;
+  background-color: var(--color-surface);
+}
+
+.signup__password-rule--ok {
+  color: var(--color-success);
+}
+
+.signup__password-rule--ok::before {
+  border-color: var(--color-success);
+  background-color: var(--color-success);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3 6.5l2 2 4-4.5' stroke='white' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* =============================================================
+   Responsive: tablet and desktop (≥768px)
+   ============================================================= */
+
+@media (min-width: 1024px) {
+  .signup__form-wrap {
+    max-width: 480px;
+  }
+}

@@ -1,0 +1,12 @@
+/* App shell — root layout for every route */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app__main {
+  flex: 1 0 auto;
+  width: 100%;
+}

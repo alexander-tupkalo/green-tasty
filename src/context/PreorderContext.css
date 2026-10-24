@@ -1,0 +1,64 @@
+/* =============================================================
+   Pre-order toast — global feedback when an item is added to
+   the pre-order. Same visual treatment as the cart toast, but
+   with a different label so users can tell the two apart.
+
+   All values use design tokens from src/index.css.
+   ============================================================= */
+
+.preorder-toast {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-2xl);
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: var(--space-sm) var(--space-lg);
+  background-color: var(--color-brand-strong);
+  color: var(--color-text-inverse);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-md);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  animation: preorder-toast-in 200ms ease-out,
+             preorder-toast-out 300ms ease-in 1700ms forwards;
+  pointer-events: none;
+  max-width: calc(100vw - 2 * var(--space-lg));
+}
+
+.preorder-toast__text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@keyframes preorder-toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 12px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes preorder-toast-out {
+  from {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, 12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preorder-toast {
+    animation: none;
+    opacity: 1;
+  }
+}

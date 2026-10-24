@@ -1,0 +1,257 @@
+/* =============================================================
+   Menu page — three blocks:
+   1. Intro (eyebrow + title + lead + demo badge)
+   2. Category navigation (filter chips, mobile scrollable)
+   3. Food Menu (5 categories, 4 items each) + Bar Menu (3 categories, 4 items each)
+
+   Mobile-first. Breakpoints: 768px (tablet), 1024px (desktop).
+   All values use design tokens from src/index.css.
+
+   The dish card itself lives in src/components/MenuCard.css —
+   this file only styles the page-level layout.
+   ============================================================= */
+
+.menu-page {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--space-3xl) var(--container-padding);
+}
+
+/* =============================================================
+   1. Intro
+   ============================================================= */
+
+.menu-page__intro {
+  max-width: 60ch;
+  margin-bottom: var(--space-xl);
+}
+
+.menu-page__eyebrow {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-brand-soft);
+  text-transform: uppercase;
+  margin-bottom: var(--space-sm);
+}
+
+.menu-page__title {
+  font-size: var(--fs-3xl);
+  line-height: var(--lh-tight);
+  color: var(--color-brand-strong);
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: var(--space-sm);
+}
+
+.menu-page__lead {
+  font-size: var(--fs-md);
+  color: var(--color-text-secondary);
+  line-height: var(--lh-relaxed);
+  margin-bottom: var(--space-md);
+}
+
+.menu-page__badge {
+  display: inline-block;
+  padding: var(--space-xs) var(--space-md);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-warning);
+  background-color: var(--color-warning-tint);
+  border-radius: var(--radius-pill);
+}
+
+/* =============================================================
+   2. Category navigation (filter chips)
+   ============================================================= */
+
+.menu-nav {
+  margin-bottom: var(--space-2xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.menu-nav__list {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--space-sm);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: var(--space-2xs) 0;
+  list-style: none;
+}
+
+.menu-nav__list::-webkit-scrollbar {
+  display: none;
+}
+
+.menu-nav__item {
+  flex-shrink: 0;
+}
+
+.menu-nav__link {
+  display: inline-block;
+  padding: var(--space-sm) var(--space-lg);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--color-text-secondary);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--transition-fast),
+              background-color var(--transition-fast),
+              border-color var(--transition-fast);
+}
+
+.menu-nav__link:hover {
+  color: var(--color-brand-strong);
+  background-color: var(--color-brand-tint);
+  border-color: var(--color-brand-soft);
+}
+
+.menu-nav__link--active {
+  color: var(--color-text-on-brand);
+  background-color: var(--color-brand);
+  border-color: var(--color-brand);
+}
+
+.menu-nav__link--active:hover {
+  color: var(--color-text-on-brand);
+  background-color: var(--color-brand-strong);
+  border-color: var(--color-brand-strong);
+}
+
+/* =============================================================
+   3. Food Menu / Bar Menu major sections
+   ============================================================= */
+
+.menu-section {
+  padding: var(--space-2xl) 0;
+}
+
+.menu-section--food {
+  border-top: 1px solid var(--color-border);
+}
+
+.menu-section--bar {
+  margin-top: var(--space-2xl);
+  padding: var(--space-2xl) var(--container-padding);
+  background-color: var(--color-surface-soft);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  margin-left: calc(-1 * var(--container-padding));
+  margin-right: calc(-1 * var(--container-padding));
+}
+
+.menu-section__header {
+  max-width: 60ch;
+  margin-bottom: var(--space-xl);
+}
+
+.menu-section__eyebrow {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-brand-soft);
+  text-transform: uppercase;
+  margin-bottom: var(--space-sm);
+}
+
+.menu-section__title {
+  font-size: var(--fs-2xl);
+  line-height: var(--lh-tight);
+  color: var(--color-brand-strong);
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: var(--space-sm);
+}
+
+.menu-section__lead {
+  font-size: var(--fs-md);
+  color: var(--color-text-secondary);
+  line-height: var(--lh-relaxed);
+}
+
+/* =============================================================
+   Category block
+   ============================================================= */
+
+.menu-section__categories {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xl);
+}
+
+.menu-category {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.menu-category__title {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+  color: var(--color-brand-strong);
+  letter-spacing: var(--tracking-tight);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* =============================================================
+   Menu items grid
+   ============================================================= */
+
+.menu-category__items {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+/* =============================================================
+   Responsive: tablet (≥768px)
+   ============================================================= */
+
+@media (min-width: 768px) {
+  .menu-page__title {
+    font-size: var(--fs-4xl);
+  }
+
+  .menu-section__title {
+    font-size: var(--fs-3xl);
+  }
+
+  .menu-nav__list {
+    justify-content: center;
+    overflow-x: visible;
+  }
+
+  .menu-category__items {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  .menu-section__categories {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+  }
+}
+
+/* =============================================================
+   Responsive: desktop (≥1024px)
+   ============================================================= */
+
+@media (min-width: 1024px) {
+  .menu-category__items {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  .menu-section__categories {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2xl);
+  }
+}
